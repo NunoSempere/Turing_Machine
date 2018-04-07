@@ -5,8 +5,6 @@ He was WRONG.
 
 I never make jokes :)
 
-
-
 Anyways, to grok how Turing machines, as described in Automata and Computability, by Dexter C. Kozen, work, here are:
 - A Turing Machine that accepts if a number n doesn't divide another number m and rejects otherwise.
 - A Turing Machine that accepts if n doesn't divide m, or if n=m, and rejects otherwise.
