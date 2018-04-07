@@ -6,7 +6,7 @@ He was wrong.
 
 I never make jokes :)
 
-Anyways, to see if I can do it and to grok how Turing machines work, as described in Automata and Computability, by Dexter C. Kozen, here are:
+Anyways, to see if I could do it and to grok how Turing machines work, as described in Automata and Computability, by Dexter C. Kozen, here are:
 - A Turing Machine that accepts if a number n doesn't divide another number m and rejects otherwise.
 - A Turing Machine that accepts if n doesn't divide m, or if n=m, and rejects otherwise.
 - A Turing Machine that accepts if n is prime, and rejects otherwise.
