@@ -5,7 +5,7 @@ He was WRONG.
 
 I never make jokes :)
 
-Anyways, to grok how Turing machines, as described in Automata and Computability, by Dexter C. Kozen, work, here are:
+Anyways, to see if I can do it and to grok how Turing machines work, as described in Automata and Computability, by Dexter C. Kozen, here are:
 - A Turing Machine that accepts if a number n doesn't divide another number m and rejects otherwise.
 - A Turing Machine that accepts if n doesn't divide m, or if n=m, and rejects otherwise.
 - A Turing Machine that accepts if n is prime, and rejects otherwise.
@@ -15,7 +15,20 @@ Early versions, deprecated, start with 0.
 - A Turing Machine that accepts if a number n doesn't divide another number m and rejects otherwise.
 - A Turing Machine that detects whether a number >=2 is prime.
 
-Here is a walkthrough of how the TMs work. The states are gradually defined as the Turing machine moves, and then modified when it makes sense to do so. I think that this will be easier to understand than a table.
+Every function is my own.
+
+If you want to see the raw functions, go to, f.ex., find_nth_prime 1.1 -> states.c You can also download any folder and, in Linux/Ubuntu, compile it with the instruction 
+      gcc -g main.c turing.c states.c turing.h states.h const.h -o main
+ and run it in the Linux command line with
+      ./main
+ To do this, you will have to be in the appropriate folder, which you can change by using the command 
+      cd ./Foldername/Subfoldername/Subsubfoldername
+ In Windows, compile it and run it with the compiler of your choice.
+ There is also an animation at: https://www.youtube.com/watch?v=dQw4w9WgXcQ&t=42
+
+***
+
+Below is a transcription of my notes, which are dry but should be easy to understand. The states are gradually defined as the Turing machine moves, and then modified when it makes sense to do so. 
 
 (divisor 1.0) Accepts if n doesn't divide m, rejects otherwise.
 
