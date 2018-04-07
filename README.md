@@ -1,7 +1,8 @@
 I asked my programming teacher how to create a Turing Machine that reaches the nth prime.
 
 He thought I was joking.
-He was WRONG.
+
+He was wrong.
 
 I never make jokes :)
 
