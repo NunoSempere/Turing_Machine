@@ -1,11 +1,11 @@
-# Turing_Machine
-Are you interested in project based learning?
-No, I'm interested in learning based projecting.
-
 I asked my programming teacher how to create a Turing Machine that reaches the nth prime.
+
 He thought I was joking.
 He was WRONG.
+
 I never make jokes :)
+
+
 
 Anyways, to grok how Turing machines, as described in Automata and Computability, by Dexter C. Kozen, work, here are:
 - A Turing Machine that accepts if a number n doesn't divide another number m and rejects otherwise.
