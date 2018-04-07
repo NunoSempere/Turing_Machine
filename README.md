@@ -32,32 +32,37 @@ state 0:
 
 state 1:
 - Looks for a 1 to replace by a three
-- if symbol = 1, write 3, move to the right, change to state 2.
-- otherwise: move to the right, keep state.
+- if symbol = 1, write 3, move right, change to state 2.
+- otherwise: move right, keep state.
 
 state 2:
 - it looks for a 2 to replace by a 4.
 - if symbol = 2, write 4, change to state 3.
-- else: move to the right, keep state
+- else: move right, keep state
 
 state 3:
 - if it doesn't find a 0, go to the left, keep state
-- if it finds a 0, write 0, move to the right, go to state 1.
+- if it finds a 0, write 0, move right, go to state 1.
 
 // As I write this, I realize that if I replace state 0 by state 3, nothing happens.
 
-// Excursus: After competing this project, I searched for similar ones, and found one by a William Bernoudy. My finding the nth prime TM had 14 states and 12 symbols, while his had 14 states and only 10 symbols. But if I replace state 0 by state 3, I have one state less! Anyways, from now on no state is state 3.
+// Excursus: After competing this project, I searched for similar ones, and found one by a William Bernoudy. My finding the nth prime TM had 14 states and 12 symbols, while his had 14 states and only 10 symbols. But if I replace state 0 by state 3, I have one state less! Anyways, from now on no state is state 3. We modify state 2, which refers to it.
 
 state 0:
-- If symbol = 0, go to state 1.
-- Else: move to the right, keep state.
+- If symbol = 0, move right, change to state 1.
+- else: move left, keep state.
+
+state 2:
+- it looks for a 2 to replace by a 4.
+- if symbol = 2, write 4, change to state 0.
+- else: move right, keep state
 
 Now, once all the 1s are turned into 3s, state 1 would go on searching, so we want to modify it to notice that it has run out of threes.
 
 state 1:
-- if symbol = 1, write 3, move to the right, change to state 2.
-- if symbol = 8, write 8, move to the right, change to state 4.
-- otherwise: move to the right.
+- if symbol = 1, write 3, move right, change to state 2.
+- if symbol = 8, write 8, move right, change to state 4.
+- otherwise: move right.
 
 If there were no 2s left to turn to 4s, then n|m (n divides m). But if there are, n can still divide m, so we keep on going.
 
@@ -68,7 +73,7 @@ state 4:
 We also notice that if state 2 finds no 2s to turn into 4s, then ¬ (n|m), so we add that option.
 
 state 2:
-- if symbol = 2, write 4, change to state 3.
+- if symbol = 2, write 4, change to state 0.
 - if symbol = 9, ACCEPT.
 - else: move to the right.
 
@@ -88,8 +93,7 @@ End.
 (divisor 1.1) Accepts if n|m or if n=m.
 
 Now the input is: 05111...11822..229
-The 5 will be to a 6 once we change the 2 that corresponds to the 8. If there is no such 2, n = m.
-So we modify state 4 and 5 and create a state 6.
+The 5 will be cahnged to a 6 once we change the 2 that corresponds to the 8. If there is no such 2, n = m. So we modify state 4 and 5 and create a state 6.
 
 state 5:
 - if it reads a 3, write 1, move left, keep state.
@@ -103,6 +107,94 @@ state 4:
 
 state 6:
 - if it reads a 5, accept.
-- if it erads a 6, reject.
+- if it reads a 6, reject.
 - else: move to the left.
 
+End.
+
+(is prime 1.1) Accepts if n is prime.
+
+We start with: 0518777...77722..229
+
+This reads: The initial n=2, after which there are enough 7s to increase n to find divisors of m.
+
+Q: But, how many 7s?
+
+A: Well, a priori at least sqrt(n), but up to n, if you one.
+
+Q: But Nuño, if you put ceil(sqrt(n)) '7's, aren't you offloading some of the calculations to yourself instead of making the machine calculate it?
+
+A: Yes, I am.
+
+Anyways, right now the only state which can accept is state 2, which does so if ¬(n|m) for a given n. Instead of accepting, we want to increase n by 1. We modify state 2, and create 2 new states: state 7 and state 8.
+
+state 2:
+- if it reads a 2: write 4, move left, change to state 0.
+- if it reads a 9: write 9, move left, change to state 7.
+- else: move to the right
+
+state 7:
+- if it reads a 6: write 5, move left, keep state.
+- if it reads a 4: write 2, move left, keep state.
+- if it reads a 3: write 1, move left, keep state.
+- if it reads a 0: write 0, move right, change to state 8.
+
+state 8:
+-if it reads an 8: write 1, move right, keep state.
+-if it reads a 7: write 8, move right, change to state 3.
+- if it reads a 2: ACCEPT. There is no space left, at least one of each pair of divisors has been tried
+
+End.
+
+(Find the nth prime 1.1)
+
+Initial input: 0AA...AA51829␣␣␣...␣␣
+
+It will replace an A by a B each time it finds a prime, so if n-1 is the number of 'A's, it will find the nth prime.
+
+State 9 will change an A to a B. States 10, 11  and 12 initialize n to 2. 12, 13 and 14 move m one step to the right and increase it to m+1. By moving it one step to the right, n is bounded only by m+1.
+
+The states that can accept are state 6 and state 8, and only state 6 can reject.
+
+state 6 
+- if it reads a 5, write 5, change to state 9.
+- if it reads a 6: write 6, change to state 10.
+- else: move to the left.
+
+state 8:
+-if it reads an 8: write 1, move right, keep state.
+-if it reads a 7: write 8, move right, change to state 3.
+-if it reads a 2: write 2, move left, change to state 9.
+
+state 9:
+- if it reads an A: write B, move right, change to state 10.
+- if it reads a 0: ACCEPT. There are no more As to change.
+- else: move left.
+
+state 10:
+- if is reads a 1: write 1, move right, change to state 11.
+- if is reads a 3: write 1, move right, change to state 11.
+- else: move right.
+
+state 11:
+- if it reads a 1: write 8, move right, change to state 12
+- if it reads a 3: write 8, move right, change to state 12
+- if it reads a X: write 8, move right, change to state 12
+- else: REJECT // Shouldn't be seeing anything else.
+
+state 12:
+- if it reads a 1: write 7, move right, keep state
+- if it reads a 3: write 7, move right, keep state
+- if it reads a 8: write 7, move right, keep state
+- if it reads a 2: write 7, move right, change to state 13.
+- if it reads a 4: write 7, move right, change to state 13.
+- else: move right.
+
+state 13:
+- if it reads a 9: write 2, move right, keep state
+- if it reads a 4: write 2, move right, keep state
+- if it reads a ␣: write 2, move right, change to state 14
+- else: move right.
+
+state 14:
+- if it reads a ␣: write W, move left, change to state 0.
