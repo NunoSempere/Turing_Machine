@@ -37,7 +37,7 @@ Gets as an input 0111...11822..229␣␣␣␣␣...., where:
 - 0 is the left endmarker
 - There are (n-1) '1's, and 1 '8'. The 8 signals the end of the '1's.
 - Similarly, there are (m-2) '2's and 1 '9'. The 9 signals the end of the '2's.
-- The ␣ are empty characters, and the TM has an infinite number of them to the left.
+- The ␣ are blanks, and the TM has an infinite number of them to the left.
 
 state 0:
 - The TM starts on this state.
@@ -163,11 +163,13 @@ End.
 
 Initial input: 0AA...AA51829␣␣␣...␣␣
 
-It will replace an A by a B each time it finds a prime, so if n-1 is the number of 'A's, it will find the nth prime.
+The TM will replace an A by a B each time it finds a prime, so if n-1 is the number of 'A's, it will find the nth prime.
 
-State 9 will change an A to a B. States 10, 11  and 12 initialize n to 2. 12, 13 and 14 move m one step to the right and increase it to m+1. By moving it one step to the right, n is bounded only by m+1.
+State 9 will change an A to a B. States 10, 11  and 12 initialize n to 2. 
 
-The states that can accept are state 6 and state 8, and only state 6 can reject.
+States 12, 13 and 14 move m one step to the right and increase it to m+1. Thus, at each step n will be bounded only by m+1.
+
+The states that can accept are state 6 and state 8, and only state 6 can reject. We modify them so:
 
 state 6 
 - if it reads a 5, write 5, change to state 9.
