@@ -1,4 +1,4 @@
-I asked my programming teacher how to create a Turing Machine that reaches the nth prime.
+I asked my programming teacher how to create a Turing Machine that stopped once it found the nth prime.
 
 He thought I was joking.
 
@@ -29,10 +29,10 @@ If you want to see the raw functions, go to, f.ex., find_nth_prime 1.1 -> states
 
 ***
 
-Below is a transcription of my notes, which are dry but should be easy to understand. The states are gradually defined as the Turing machine moves, and then modified when it makes sense to do so. 
+Below is a transcription of my notes, which are dry but should be easy to understand: you might find them both exhaustive and exhausting and thus, you probably have better things to do with your time. Anyways, the states are gradually defined as the Turing machine moves, and then modified when it makes sense to do so.
 
 Pero, Nuño, ¿por qué lo has escrito en inglés y no en español?
-Porque mi bibliografía estaba en inglés, porque escribir código en c en español es engorroso, y porque me confunde un poco cambiar de idioma rápidamente.
+Porque mi bibliografía estaba en inglés, porque escribir código en c en español es engorroso, y porque me confunde un poco cambiar de idioma.
 
 (divisor 1.0) Accepts if n doesn't divide m, rejects otherwise.
 
